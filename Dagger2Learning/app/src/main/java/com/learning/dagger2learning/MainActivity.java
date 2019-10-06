@@ -3,9 +3,11 @@ package com.learning.dagger2learning;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import javax.inject.Inject;
+
 public class MainActivity extends AppCompatActivity {
 
-    Car car;
+    @Inject Car car;
     CarComponent carComponent;
 
     @Override
@@ -13,7 +15,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         carComponent = DaggerCarComponent.create();
-        car = carComponent.getCar();
+        carComponent.inject(this);
+ //       car = carComponent.getCar();
         car.drive();
     }
 }
